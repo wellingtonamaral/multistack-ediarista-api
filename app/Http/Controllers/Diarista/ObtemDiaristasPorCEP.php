@@ -7,6 +7,7 @@ use App\Http\Resources\DiaristaPublico;
 use App\Http\Resources\DiaristaPublicoCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ObtemDiaristasPorCEP extends Controller
 {
@@ -19,7 +20,17 @@ class ObtemDiaristasPorCEP extends Controller
      */
     public function __invoke(Request $request)
     {
-       $diaristas = User::where('tipo_usuario', '=', 2)->get();
-       return  new DiaristaPublicoCollection($diaristas);
+
+        $cep =  $request->cep;
+        //transformar o cep no código do IBGE
+        $resposta = Http::get("https://viacep.com.br/ws/$cep/json/");
+
+        $dados = $resposta->json();
+
+            return  new DiaristaPublicoCollection(
+        User::diaristaDisponivelCidade($dados['ibge']),
+        User::diaristaDisponivelCidadeTotal($dados['ibge'])
+
+    );
     }
 }
