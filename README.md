@@ -45,7 +45,7 @@ php artisan serve
 ------------
 
 ## 📌 Autor ##
-- Allan Capistrano: [Github](https://github.com/wellingtonamaral) - [Linkedin](https://www.linkedin.com/in/wellamaral/) - [E-mail](https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=well.ribeiro@live.com)
+- Wellington Amaral: [Github](https://github.com/wellingtonamaral) - [Linkedin](https://www.linkedin.com/in/wellamaral/) - [E-mail](https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=well.ribeiro@live.com)
 
 ------------
 
