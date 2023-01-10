@@ -50,4 +50,4 @@ php artisan serve
 ------------
 
 ## ⚖️ Licença ##
-[MIT License]()
+[MIT License](https://github.com/wellingtonamaral/multistack-ediarista-api/blob/main/LICENSE)
