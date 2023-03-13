@@ -3,10 +3,12 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiHandler;
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -46,5 +48,15 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**Faz O tratamento de exceções no laravel */
+    public function render($request, Throwable $e)
+    {
+
+        if ($request->is('api/*')) {
+            return $this->getJsonException($e);
+        }
+        return parent::render($request, $e);
     }
 }

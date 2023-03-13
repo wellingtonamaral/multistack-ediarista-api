@@ -8,17 +8,21 @@ use App\Models\User;
 use App\Services\ConsultaCEP\ConsultaCEPInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Validation\ValidationException;
 
 class ObtemDiaristasPorCEP extends Controller
 {
 
     public function __invoke(Request $request, ConsultaCEPInterface $servicoCEP): DiaristaPublicoCollection|JsonResponse
     {
-        $dados = $servicoCEP->buscar($request->cep ?? '');
+
+        $request->validate([
+            'cep' => ['required','numeric']
+        ]);
+        $dados = $servicoCEP->buscar($request->cep);
 
         if ($dados === false) {
-            return response()->json(['erro' => 'CEP Inválido'], 400);
+            throw ValidationException::withMessages(['cep'=> 'Cep não encontrado']);
         }
 
         return  new DiaristaPublicoCollection(
