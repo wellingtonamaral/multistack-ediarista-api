@@ -4,6 +4,7 @@ use App\Http\Controllers\Diarista\ObtemDiaristasPorCEP;
 use App\Http\Controllers\Diarista\VerificaDisponibilidade;
 use App\Http\Controllers\Endereco\BuscaApiExterna;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Usuario\CadastroController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', IndexController::class);
@@ -13,3 +14,5 @@ Route::get('/diaristas/disponibilidade', VerificaDisponibilidade::class)->name('
 Route::get('/enderecos', BuscaApiExterna::class)->name('enderecos.cep');
 
 //Route::get('/servicos',ObtermServicos::class)->name('servicos.index');
+
+Route::post('/usuarios',[CadastroController::class,'store'])->name('usuarios.create');
