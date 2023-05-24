@@ -2,12 +2,12 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\User;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class UsuarioCadastrado extends Mailable
 {
@@ -18,10 +18,11 @@ class UsuarioCadastrado extends Mailable
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        private User $user
+    )
+    {}
+
     /**
      * Build the message.
      *
@@ -29,41 +30,12 @@ class UsuarioCadastrado extends Mailable
      */
     public function build()
     {
-        return $this->view('email.mensagens.cadastro');
+        return $this
+            ->subject('Bem Vindo(a) ao E-Diaristas')
+            ->from('nao-responda@e-diaristas.com.br', "E-Diaristas")
+            ->view('email.mensagens.cadastro', [
+                'usuario' => $this->user
+            ]);
     }
+
 }
-
-    /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
-    //public function envelope()
-    //{
-        //return new Envelope(
-           // subject: 'Usuario Cadastrado',
-        //);
-    //}
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    //public function content()
-    //{
-       // return new Content(
-         //   view: 'view.name',
-       // );
-   // }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    //public function attachments()
-    //{
-    //  return [];
-    // }
-

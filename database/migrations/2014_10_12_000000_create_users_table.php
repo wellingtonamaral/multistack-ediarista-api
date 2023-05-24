@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('foto_usuario')->nullable();
             $table->char('telefone',11);
             $table->integer('tipo_usuario');
-            $table->string('chave_pix')->unique();
+            $table->string('chave_pix')->nullable();
             $table->integer('reputacao')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

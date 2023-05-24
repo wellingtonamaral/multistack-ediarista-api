@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -9,8 +10,12 @@ trait ApiHandler
 {
     protected function getJsonException(\Throwable $e): JsonResponse
     {
+       
         if ($e instanceof ValidationException) {
             return $this->validationException($e);
+        }
+        if ($e instanceof AuthenticationException) {
+            return $this->authenticationException($e);
         }
         return $this->genericException($e);
     }
@@ -23,5 +28,10 @@ trait ApiHandler
     {
         return resposta_padrao("erro interno no servidor","internal_erro", 500);
 
+    }
+    
+    protected function authenticationException(AuthenticationException $e): JsonResponse
+    {
+        return resposta_padrao($e->getMessage(), 'token_not_valid','401');
     }
 }
