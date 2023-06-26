@@ -42,7 +42,7 @@ class Usuario extends JsonResource
                 "access" => $this->token,
                 "refresh" => $this->token,
                 "token_type" => "bearer",
-                "expires_in" => Auth::factory()->getTTL() * 60
+                "expires_in" => Auth::factory()->getTTL() * 600
            ]
             ];
         }

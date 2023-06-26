@@ -28,7 +28,7 @@ if(!function_exists('resposta_token'))
         'access' => $token,
         'refresh' => $token,
         'token_type' => 'bearer',
-        'expires_in' => Auth::factory()->getTTL() * 60
+        'expires_in' => Auth::factory()->getTTL() * 600
     ]);
 }
 }
