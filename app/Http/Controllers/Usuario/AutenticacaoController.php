@@ -20,11 +20,12 @@ class AutenticacaoController extends Controller
     {
         $credenciais = $request->only(['email', 'password']);
 
-        if(!$token = Auth::attempt($credenciais)){
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+         if(!$token = Auth::attempt($credenciais)){
+             return response()->json(['error' => 'Unauthorized'], 401);
+         }
 
         return resposta_token($token);
+       //dd($credenciais);
     }
 
     /**

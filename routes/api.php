@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Diaria\CadastroController as DiariaCadastroController;
 use App\Http\Controllers\Diarista\ObtemDiaristasPorCEP;
 use App\Http\Controllers\Diarista\VerificaDisponibilidade;
 use App\Http\Controllers\Endereco\BuscaApiExterna;
@@ -25,5 +26,7 @@ Route::post('/usuarios',[CadastroController::class,'store'])->name('usuarios.cre
 Route::get('/me', [AutenticacaoController::class, 'me'])
 ->middleware('auth:api')
 ->name('usuarios.show');
+
+Route::post('/diarias',[DiariaCadastroController::class, 'store'])->name('diarias.store')->middleware('auth:api');
 
 
